@@ -1,0 +1,35 @@
+{
+  "builders": [{
+    "associate_public_ip_address": true,
+    "type": "amazon-ebs",
+    "ssh_pty": "true",
+
+    "region": "eu-west-1",
+    "source_ami": "ami-0d063c6b",
+    "instance_type": "t2.micro",
+
+    "ssh_username": "centos",
+    "ami_name": "{{user `ami_name`}} {{timestamp}}",
+
+    "tags": {
+      "Name": "{{user `ami_name`}}",
+      "Platform": "{{user `ami_platform`}}",
+      "Role": "{{user `ami_role`}}"
+    }
+  }],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum update -y",
+        "sudo yum install -y python"
+      ]
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "{{user `ami_playbook_file`}}",
+      "extra_arguments": [ "--become", "--become-method=sudo" ]
+    }
+  ]
+}
