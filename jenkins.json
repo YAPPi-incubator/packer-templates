@@ -1,0 +1,6 @@
+{
+  "ami_name": "Jenkins",
+  "ami_platform": "CentOS",
+  "ami_role": "master",
+  "ami_playbook_file": "provisioning/jenkins.yml"
+}
