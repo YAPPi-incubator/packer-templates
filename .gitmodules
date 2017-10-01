@@ -1,0 +1,3 @@
+[submodule "provisioning"]
+	path = provisioning
+	url = https://github.com/YAPPi-incubator/jenkins-provisioning.git
